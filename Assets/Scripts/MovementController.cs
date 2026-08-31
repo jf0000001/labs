@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class MovementController : MonoBehaviour
 {
@@ -11,6 +12,9 @@ public class MovementController : MonoBehaviour
 
     void Update()
     {
-        transform.Translate(Vector3.left * speed * Time.deltaTime);
+        if (Keyboard.current.spaceKey.isPressed)
+        {
+            transform.Translate(Vector3.left * speed * Time.deltaTime);
+        }
     }
 }
