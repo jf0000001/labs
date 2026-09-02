@@ -14,6 +14,7 @@ public class FloatingObject : MonoBehaviour
 
     void Update()
     {
+        // Uses world space to move
         float newY = startPosition.y + Mathf.Sin(Time.time * speed) * height;
         transform.position = new Vector3(
             startPosition.x,

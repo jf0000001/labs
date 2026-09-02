@@ -11,6 +11,7 @@ public class CameraZoom : MonoBehaviour
 
     void Update()
     {
+        // Uses local space to zoom
         Keyboard input = Keyboard.current; // Verify keyboard is found
         if (input == null) { return; }
 
@@ -19,7 +20,7 @@ public class CameraZoom : MonoBehaviour
             0,
             (input.rKey.isPressed ? 1 : 0) - (input.fKey.isPressed ? 1 : 0)
         );
-        
+
         transform.Translate(zoomDirection * zoomSpeed * Time.deltaTime);
     }
 }

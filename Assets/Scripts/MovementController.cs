@@ -13,6 +13,8 @@ public class MovementController : MonoBehaviour
 
     void Update()
     {
+        // Uses local space to move
+
         Keyboard input = Keyboard.current; // Verify keyboard exists
         if (input == null) { return; }
 
