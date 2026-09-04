@@ -6,6 +6,27 @@ public class MovementController : MonoBehaviour
     public float moveSpeed = 5f;
     public float turnSpeed = 100f;
 
+    private PlayerInput controls;
+    private InputActionMap playerMap;
+    private Vector2 moveInput;
+
+    void Awake()
+    {
+        controls = GetComponent<PlayerInput>();
+        playerMap = controls.actions.FindActionMap("Player");
+    }
+
+    private void OnEnable()
+    {
+        playerMap.Enable();
+        playerMap.FindAction("Move").performed += ctx => moveInput = ctx.ReadValue<Vector2>();
+        playerMap.FindAction("Move").canceled += ctx => moveInput = Vector2.zero;
+    }
+
+    private void OnDisable()
+    {
+        playerMap.Disable();
+    }
     void Start()
     {
         
@@ -18,15 +39,10 @@ public class MovementController : MonoBehaviour
         Keyboard input = Keyboard.current; // Verify keyboard exists
         if (input == null) { return; }
 
-        /*
-        Creates a direction vector based on keys being pressed.
-        Checks if a key is pressed, and if it is, it is set to 1, otherwise, 0.
-        So, if d is pressed, and a is pressed, it is 1 - 1, so the player does not move
-        */
         Vector3 direction = new Vector3(
-            (input.dKey.isPressed ? 1 : 0) - (input.aKey.isPressed ? 1 : 0),
+            moveInput.x,
             0,
-            (input.wKey.isPressed ? 1 : 0) - (input.sKey.isPressed ? 1 : 0)
+            moveInput.y
         );
         
         transform.Translate(direction * moveSpeed * Time.deltaTime);
