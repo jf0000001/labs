@@ -41,10 +41,7 @@ public class VectorVisualizer : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        if (player == null || target == null)
-        {
-            return;
-        }
+        if (player == null || target == null) { return; }
 
         Gizmos.color = Color.green;
         
