@@ -64,6 +64,5 @@ public class VectorVisualizer : MonoBehaviour
         Vector3 horizontalTarget = new Vector3(target.position.x, player.position.y, target.position.z);
         Gizmos.color = Color.yellow;
         Gizmos.DrawLine(player.position, horizontalTarget);
-
     }
 }
