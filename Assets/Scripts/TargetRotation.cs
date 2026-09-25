@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class TargetRotation : MonoBehaviour
 {
@@ -10,8 +11,15 @@ public class TargetRotation : MonoBehaviour
     [Header("Movement")]
     [SerializeField] private float rotationSpeed = 90f;
 
+    private bool lockOn = false;
+
     void Update()
     {
+        Keyboard input = Keyboard.current; // Verify keyboard exists
+        if (input == null) { return; }
+        if (input.zKey.wasPressedThisFrame) { lockOn = !lockOn; }
+        if (!lockOn) { return; }
+
         Vector3 direction = target.position - transform.position;
         direction.y = 0f;
         if (direction.sqrMagnitude < 0.01f) { return; }
