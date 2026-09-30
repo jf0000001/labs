@@ -15,9 +15,11 @@ public class TargetRotation : MonoBehaviour
 
     void Update()
     {
+        rotationText.text = $"Y Rotation: {transform.eulerAngles.y:F1}°";
+        
         Keyboard input = Keyboard.current; // Verify keyboard exists
         if (input == null) { return; }
-        if (input.zKey.wasPressedThisFrame) { lockOn = !lockOn; }
+        if (input.tKey.wasPressedThisFrame) { lockOn = !lockOn; }
         if (!lockOn) { return; }
 
         Vector3 direction = target.position - transform.position;
@@ -31,8 +33,6 @@ public class TargetRotation : MonoBehaviour
             targetRotation,
             rotationSpeed * Time.deltaTime
         );
-
-        rotationText.text = $"Y Rotation: {transform.eulerAngles.y:F1}°";
     }
 
     private void OnDrawGizmos()
