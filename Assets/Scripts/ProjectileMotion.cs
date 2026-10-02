@@ -6,6 +6,7 @@ public class ProjectileMotion : MonoBehaviour
 {
     [Header("Movement")]
     [SerializeField] private float gravity = -9.81f;
+    [SerializeField] private float friction = 3.5f;
 
     [Header("UI")]
     [SerializeField] private Slider angleSlider;
@@ -63,6 +64,8 @@ public class ProjectileMotion : MonoBehaviour
             );
 
             velocity.y = -velocity.y / 2f; // bouncy projectile !!
+            velocity.x = Mathf.Lerp(velocity.x, 0f, friction * Time.deltaTime); // friction so it slows down
+            velocity.z = Mathf.Lerp(velocity.z, 0f, friction * Time.deltaTime);
         }
 
         velocityText.text = $"Velocity: {velocity}";
