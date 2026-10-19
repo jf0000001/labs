@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -20,6 +21,11 @@ public class TRSController : MonoBehaviour
     [SerializeField] private Slider scaleX;
     [SerializeField] private Slider scaleY;
     [SerializeField] private Slider scaleZ;
+
+    [Header("TextLabels")]
+    [SerializeField] private TextMeshProUGUI positionText;
+    [SerializeField] private TextMeshProUGUI rotationText;
+    [SerializeField] private TextMeshProUGUI scaleText;
 
     void Start()
     {
@@ -57,5 +63,20 @@ public class TRSController : MonoBehaviour
         scaleZ.onValueChanged.AddListener(
             z => target.localScale = new Vector3(target.localScale.x, target.localScale.y, z)
         );
+    }
+
+    void Update()
+    {
+        if (target == null)
+        {
+            return;
+        }
+
+        positionText.text =
+            $"Position: ({target.position.x:F2}, {target.position.y:F2}, {target.position.z:F2})";
+        rotationText.text =
+            $"Rotation: ({target.eulerAngles.x:F1}, {target.eulerAngles.y:F1}, {target.eulerAngles.z:F1})";
+        scaleText.text =
+            $"Scale: ({target.localScale.x:F2}, {target.localScale.y:F2}, {target.localScale.z:F2})";
     }
 }
