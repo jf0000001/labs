@@ -12,12 +12,12 @@ public class TRSController : MonoBehaviour
     [SerializeField] private Slider posY;
     [SerializeField] private Slider posZ;
 
-    [Header("PositionSliders")]
+    [Header("RotationSliders")]
     [SerializeField] private Slider rotX;
     [SerializeField] private Slider rotY;
     [SerializeField] private Slider rotZ;
     
-    [Header("PositionSliders")]
+    [Header("ScaleSliders")]
     [SerializeField] private Slider scaleX;
     [SerializeField] private Slider scaleY;
     [SerializeField] private Slider scaleZ;
@@ -37,10 +37,10 @@ public class TRSController : MonoBehaviour
         posX.onValueChanged.AddListener(
             x => target.position = new Vector3(x, target.position.y, target.position.z)
         );
-        posX.onValueChanged.AddListener(
+        posY.onValueChanged.AddListener(
             y => target.position = new Vector3(target.position.x, y, target.position.z)
         );
-        posX.onValueChanged.AddListener(
+        posZ.onValueChanged.AddListener(
             z => target.position = new Vector3(target.position.x, target.position.y, z)
         );
 
@@ -73,9 +73,9 @@ public class TRSController : MonoBehaviour
         }
 
         positionText.text =
-            $"Position: ({target.position.x:F2}, {target.position.y:F2}, {target.position.z:F2})";
+            $"Pos: ({target.position.x:F2}, {target.position.y:F2}, {target.position.z:F2})";
         rotationText.text =
-            $"Rotation: ({target.eulerAngles.x:F1}, {target.eulerAngles.y:F1}, {target.eulerAngles.z:F1})";
+            $"Rot: ({target.eulerAngles.x:F1}°, {target.eulerAngles.y:F1}°, {target.eulerAngles.z:F1}°)";
         scaleText.text =
             $"Scale: ({target.localScale.x:F2}, {target.localScale.y:F2}, {target.localScale.z:F2})";
     }
